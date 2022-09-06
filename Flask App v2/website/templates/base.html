@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="static/style.css">
+  <title>{% block title %}Home - Base Template{% endblock %}</title>
+</head>
+
+<body>
+  <div class="nav-wrapper">
+    <header>
+      <h1>Planet Facts</h1>
+    </header>
+    <nav>
+      <ul>
+        {% if user.is_authenticated %}
+        <li><a href="/" id="home">Home</a></li>
+        <li><a href="/logout" id="logout">Log Out</a></li>
+        {% else %}
+        <li><a href="/signup" id="signup">Sign Up</a></li>
+        <li><a href="/login" id="login">Login</a></li>
+        {% endif %}
+
+      </ul>
+    </nav>
+
+  </div>
+
+  <!-- this code is for the flash messages. 
+      this gets all the messages with their categories that are being flashed, 
+      and then displays them. it loops through in case there are multiple messages.
+   lowercase true for jinga -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  {% for category, message in messages %}
+  {% if category == 'error' %}
+  <!-- <div class="alert alert-danger dismiss fade show" role="alert">
+    {{ message }}
+    <button type="button" class="close" data-dismiss="alert">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div> -->
+  <div class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    {{ message }}
+  </div>
+  {% else %}
+  <!-- <div class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    This is an alert box.
+  </div> -->
+  <!-- <div class="alert alert-success dismiss fade show" role="alert">
+    {{ message }}
+    <button type="button" class="close" data-dismiss="alert">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div> -->
+  <div class="success">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    {{ message }}
+  </div>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+
+  <div id="wrapper">
+    <main>
+      {% block content %}
+
+      {% endblock %}
+    </main>
+  </div>
+  <footer>
+    <h3>Thanks for visiting</h3>
+  </footer>
+  <!-- <script type="text/css" src="{{ url_for('static', filename='style.css') }}"></script> -->
+  <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Login from Extends{% endblock %}
+
+{% block content %}
+
+<section>
+  <h1>Welcome to the Login Page</h1>
+
+
+
+  <!-- {% if boolean == True %}
+  <h2>Yes, you are logged in!</h2>
+  {{ hello }}
+  {{ user }}
+  {% elif boolean == False %}
+  <h2>You are not logged in!</h2>
+  {% endif %} -->
+</section>
+
+<section>
+  <form method="POST">
+    <div class="form-class">
+      <label for="email">Email Address</label>
+      <input type="email" class="form" id="email" name="email" placeholder="Enter email" required>
+    </div>
+    <div class="form-class">
+      <label for="password1">Enter Password</label>
+      <input type="password" class="form" id="password1" name="password1" placeholder="Enter password">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Login
+    </button>
+  </form>
+</section>
+
+{% endblock %}
